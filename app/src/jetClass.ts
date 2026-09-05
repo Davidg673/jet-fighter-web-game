@@ -142,14 +142,14 @@ export class Jet{
         this.orbitControls.target = this.orbitTarget.add(new Three.Vector3(0, this.lookDir.y + 1,0))
 
         //move 
-        this.move(keysPressed, mouse);
+        this.move(keysPressed, mouse, delta);
 
         //shoot
         if (keysPressed[Q]) this.shoot(delta);
     }
 
 
-    private move(keysPressed: any, mouse: Three.Vector2)
+    private move(keysPressed: any, mouse: Three.Vector2, dt: number)
     {         
         if (!this.rigidBody || !this.model) return;
 
@@ -182,14 +182,14 @@ export class Jet{
         
         
         //this.moveByKeyboard(keysPressed);
-        this.moveByMouse(keysPressed, mouse);
+        this.moveByMouse(keysPressed, mouse, dt);
         //Mouse movements
         //PITCH
         
         this.rigidBody.setRotation({x: this.model.rotation.x,y:this.model.rotation.y,z:this.model.rotation.z, w:1}, true);
     }
 
-    private moveByMouse(keysPressed: any, mouse: Three.Vector2)
+    private moveByMouse(keysPressed: any, mouse: Three.Vector2, dt: number)
     {
       if (keysPressed[SPACE] == true)
         {
@@ -197,13 +197,13 @@ export class Jet{
         } else{
             if (mouse.y >1 || mouse.y < -1)
             {
-                this.model?.rotateOnAxis(this.xAxis, mouse.y * -0.0007);
+                this.model?.rotateOnAxis(this.xAxis, mouse.y * -0.03 * dt);
             } 
         }
         //ROLL
         if (mouse.x >1 || mouse.x < -1)
         {
-            this.model?.rotateOnAxis(this.zAxis,mouse.x * 0.0007);
+            this.model?.rotateOnAxis(this.zAxis,mouse.x * 0.03 * dt);
         }
         //YAW
         if (keysPressed[A] == true)

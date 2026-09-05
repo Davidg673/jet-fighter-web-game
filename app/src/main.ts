@@ -12,6 +12,9 @@ import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.j
 import { RenderPixelatedPass } from 'three/addons/postprocessing/RenderPixelatedPass.js';
 
 
+
+//SERVER
+
 //SCENE
 const scene = new Three.Scene();
 scene.background = new Three.Color(0xa8def0);
@@ -189,7 +192,7 @@ import("@dimforge/rapier3d-compat").then(RAPIER => {
         eventQueue.drainCollisionEvents((handle1, handle2, started)=>{ 
             let isBullet1: boolean | undefined = jet.isActiveBullet(handle1);
             let isBullet2: boolean | undefined = jet.isActiveBullet(handle2);
-            console.log("runs")
+
             //This part removes bullet collider/rb from world 
             if (!isBullet1 && !isBullet2) return; //environmental collision, not bullet and other
 

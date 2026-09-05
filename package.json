@@ -1,15 +1,22 @@
 {
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.19.3",
+    "@types/node": "^26.4.1",
     "@types/three": "^0.185.1",
+    "buffer": "^6.0.3",
     "dat.gui": "^0.7.9",
+    "ejs": "^6.0.1",
+    "events": "^3.3.0",
+    "express": "^5.2.1",
     "oimo": "^1.0.9",
+    "socket.io": "^4.8.3",
     "stats.js": "^0.17.0",
     "three": "^0.185.1"
   },
   "devDependencies": {
     "@dimforge/rapier3d": "^0.19.3",
     "@dimforge/rapier3d-compat": "^0.19.3",
+    "@types/express": "^5.0.6",
     "vite": "^8.2.0"
   }
 }
