@@ -21,8 +21,8 @@ export function generateMap(scene: THREE.Scene, world: RAPIER.World)
 
     //GROUND
     let groundGEO = new THREE.PlaneGeometry(MAP_WIDTH, MAP_WIDTH, 512, 512);
-    let disMap = textureLoader.load("./app/public/map/ground/map.png");
-    const groundTextureMat = textureLoader.load("./app/public/map/skybox/trance_dn.jpg");
+    let disMap = textureLoader.load("map/ground/map.png");
+    const groundTextureMat = textureLoader.load("map/skybox/trance_dn.jpg");
     wrapAndRepeatTexture(disMap);
     const groundMat = new THREE.MeshBasicMaterial({
         map: groundTextureMat,
@@ -57,12 +57,12 @@ function createBorder(scene: THREE.Scene, world: RAPIER.World, translation: THRE
 
 function loadTextures(textureLoader: THREE.TextureLoader)
 {
-    const texture_ft = textureLoader.load("./app/public/map/skybox/trance_ft.jpg");
-    const texture_bk = textureLoader.load("./app/public/map/skybox/trance_bk.jpg");
-    const texture_dn = textureLoader.load("./app/public/map/skybox/trance_dn.jpg");
-    const texture_lf = textureLoader.load("./app/public/map/skybox/trance_lf.jpg");
-    const texture_rt = textureLoader.load("./app/public/map/skybox/trance_rt.jpg");
-    const texture_up = textureLoader.load("./app/public/map/skybox/trance_up.jpg");
+    const texture_ft = textureLoader.load("map/skybox/trance_ft.jpg");
+    const texture_bk = textureLoader.load("map/skybox/trance_bk.jpg");
+    const texture_dn = textureLoader.load("map/skybox/trance_dn.jpg");
+    const texture_lf = textureLoader.load("map/skybox/trance_lf.jpg");
+    const texture_rt = textureLoader.load("map/skybox/trance_rt.jpg");
+    const texture_up = textureLoader.load("map/skybox/trance_up.jpg");
 
     materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
     materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));

@@ -1,23 +1,28 @@
 import * as Three from 'three';
 import { OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import { A, CONTROL, D, DIRECTIONS, E, MOUSE1, Q, S, SHIFT, SPACE, W } from './utils';
+import { A, CONTROL, D, DIRECTIONS, E, MOUSE1, Q, S, SHIFT, SPACE, W } from './utils.js';
 import { debug, mix, sqrt } from 'three/tsl';
 import RAPIER from '@dimforge/rapier3d-compat'
 import { FirstPersonControls, TrackballControls } from 'three/examples/jsm/Addons.js';
 
+export type DummyJet = {
+    model: Three.Group  | undefined;
+    rigidbody: RAPIER.RigidBody | undefined;
+}
+
 export class Jet{
 
     world?: RAPIER.World;
-    model?:  Three.Group;
+    model?:  Three.Group | undefined;
     rigidBody?: RAPIER.RigidBody;  
     bulletMap?: Set<number>; //Set of currently active bullets as collider handles. used to identify in collision events 
-    mixer?: Three.AnimationMixer;
-    animationsMap?: Map<string, Three.AnimationAction>; //idle, jet on
-    orbitControls?: OrbitControls;
-    camera?: Three.Camera;
+    mixer?: Three.AnimationMixer | undefined;
+    animationsMap?: Map<string, Three.AnimationAction> | undefined; //idle, jet on
+    orbitControls?: OrbitControls | undefined;
+    camera?: Three.Camera | undefined;
 
     //state
-    currentAction?: string;
+    currentAction?: string | undefined;
     cameraOffset = new Three.Vector3(0, 1, -5);
     cameraRotation = new Three.Quaternion();
     //data
@@ -157,6 +162,7 @@ export class Jet{
         const currentVelocity: number = this.magnitude(this.rigidBody.linvel());
         this.velocityToSet = currentVelocity;
 
+
         if (keysPressed[SHIFT] == true)
         {
             if (currentVelocity < this.maxVelocity)
@@ -181,8 +187,8 @@ export class Jet{
             
         
         
-        //this.moveByKeyboard(keysPressed);
-        this.moveByMouse(keysPressed, mouse, dt);
+        this.moveByKeyboard(keysPressed);
+        //this.moveByMouse(keysPressed, mouse, dt);
         //Mouse movements
         //PITCH
         

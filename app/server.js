@@ -1,49 +1,56 @@
 import express from 'express';
-import { createServer, IncomingMessage, ServerResponse} from 'node:http';
+import { createServer} from 'node:http';
 import { Server } from 'socket.io';
 import { fileURLToPath } from 'node:url';
 import path, { dirname, join } from 'node:path';
 import ejs from 'ejs';
+import http from "http"
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 const app = express();
-const server = createServer(app);
+const server = http.createServer(app);
 const io = new Server(server);
 
-//setup views folder
-app.set("views", __dirname + "/views");
 
 //setup ejs
 app.engine(".html", ejs.__express);
-app.set("view-engine", "html");
-
+app.set("view engine", "html");
+//setup views folder
+app.set("views",path.join(__dirname, "/views"));
 //public client folder
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "dist")));
+//src folder
+app.use(express.static(path.join(__dirname, "src")));
 
 
-server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+let clients = new Object();
+
+app.get('/', (req, res) => { //client side
+  res.render(path.join(__dirname, "views/index.html"));
 });
 
-
-let clients = {};
-
-io.on("connection", (client) =>{ //server side
-    console.log("User" + client.id + " connected. There are " + io.engine.clientsCount + " clients connected.");
+io.on('connection', (client) =>{ //server side
+    console.log("User-" + client.id + " connected. There are " + io.engine.clientsCount + " clients connected.");
 
     //make new client with id as index
     clients[client.id] = {
       position: [0, 0, 0],
       rotation: [0, 0, 0]
     };
+
+    const clientKeys = Object.keys(clients);
+
     //send id back to user
-    client.emit("new", client.id, io.engine.clientsCount, Object.keys(clients));
+    client.emit("introduction", client.id, io.engine.clientsCount, clientKeys);
     //update all players of new player
-    io.sockets.emit("newUserConnected", io.engine.clientsCount, client.id, Object.keys(clients));
+    io.sockets.emit("newUserConnected", io.engine.clientsCount, client.id);
 
 
     client.on("move", (pos)=>{ //if this specific client moves, update server client data and send it to all other clients to synchronise
@@ -55,13 +62,15 @@ io.on("connection", (client) =>{ //server side
     client.on("disconnect", () => {
       delete clients[client.id];
 
-      io.sockets.emit("userDisconnected", io.engine.clientsCount, client.id, Object.keys(clients));
+      io.sockets.emit("userDisconnected", io.engine.clientsCount, client.id, clientKeys);
 
       console.log("User" + client.id + " discconnected. There are " + io.engine.clientsCount + " clients connected.");
     });
 });
 
-
-app.get('/', (req, res) => { //client side
-  res.render("index.html");
+server.listen(PORT, HOST,() => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
+
+
+
