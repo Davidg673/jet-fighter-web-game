@@ -29,5 +29,8 @@
     "vite": "^8.2.0",
     "webpack": "^5.110.3",
     "webpack-cli": "^7.2.3"
+  },
+  "allowScripts": {
+    "core-js@2.6.12": true
   }
 }

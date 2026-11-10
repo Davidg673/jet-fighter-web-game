@@ -1,6 +1,6 @@
 import * as Three from 'three';
 import { OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import { A, CONTROL, D, DIRECTIONS, E, MOUSE1, Q, S, SHIFT, SPACE, W } from './utils.js';
+import { A, CONTROL, D, DIRECTIONS, E, MOUSE1, Q, S, SHIFT, SPACE, W, F } from './utils.js';
 import { debug, mix, sqrt } from 'three/tsl';
 import RAPIER from '@dimforge/rapier3d-compat'
 import { FirstPersonControls, TrackballControls } from 'three/examples/jsm/Addons.js';
@@ -150,7 +150,7 @@ export class Jet{
         this.move(keysPressed, mouse, delta);
 
         //shoot
-        if (keysPressed[Q]) this.shoot(delta);
+        if (keysPressed[F]) this.shoot(delta);
     }
 
 

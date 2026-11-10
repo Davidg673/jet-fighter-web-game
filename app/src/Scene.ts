@@ -191,7 +191,7 @@ export default class Scene extends EventEmitter{
                 const colliderToRemove = this.world.getCollider(handle1);
                 this.world.removeCollider(colliderToRemove,true)
                 this.world.removeRigidBody(this.world.getRigidBody(colliderToRemove.parent()?.handle ?? 0));
-                
+
             }else
             {
                 const colliderToRemove = this.world.getCollider(handle2);

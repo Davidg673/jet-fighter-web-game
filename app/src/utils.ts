@@ -7,6 +7,7 @@ export const S = "s";
 export const D = "d";
 export const Q = "q";
 export const E = "e";
+export const F = "f";
 export const SHIFT = "shift"
 export const CONTROL = "control"
 export const MOUSE1 ="1";
