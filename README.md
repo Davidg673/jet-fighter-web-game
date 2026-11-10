@@ -4,7 +4,7 @@
     <img src="/res/logo.png" alt="Logo" width="400">
   </a>
 
-  <h3 align="center">**Jet Fighter Web Game**</h3>
+  <h3 align="center">Jet Fighter Web Game</h3>
 
   <p align="center">
     A three.js based dogfighting game with small-scale multiplayer
@@ -30,10 +30,17 @@ more features to come down the line.
 
 ## Showcase
 
-<h3 align="center">In-game image of 2 players dogfighting</h3>
+<h3 align="center">In-game image of 2 players on local server</h3>
 <div align="center">
   <a href="https://github.com/Davidg673/jet-fighter-web-game">
-    <img src="res/gameplay.gif" alt="render" width="400">
+    <img src="res/gameplay.PNG" alt="render" width="400">
+  </a>
+</div>
+
+<h3 align="center">Flight and shooting mechanic</h3>
+<div align="center">
+  <a href="https://github.com/Davidg673/jet-fighter-web-game">
+    <img src="res/flight.gif" alt="render" width="400">
   </a>
 </div>
 
@@ -49,7 +56,7 @@ more features to come down the line.
 - Install/Clone the repository onto your system.
 - Run npm install
 - Open powershell/command prompt and navigate to root folder
-- To build three js code run "npx webpack". This will output a bundle.js to app/dist/
+- To build code under /src run "npx webpack". This will output a bundle.js to app/dist/
 - To start server run "node server.js" inside /app folder
 
 ## Roadmap
@@ -65,7 +72,7 @@ more features to come down the line.
 
 
 ## Acknowledgments
-Check Credits For full accreditations.
+Check Credits for full accreditation.
 
 * [**Jet Model**](https://skfb.ly/pK7WN)
 * [**Three.js Multiplayer implementation**](https://github.com/juniorxsound/THREE.Multiplayer#installation)
